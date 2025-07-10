@@ -26,7 +26,7 @@ def main():
     pygame.mixer.music.load("drums.wav")
     pygame.mixer.Sound("explosion.wav")
 
-    instruction_text = 'Click in a circle'
+    instruction_text = 'Click in the circle'
     text_color = (222, 222, 0)
     instructions_image = font.render(instruction_text, True, text_color)
 
