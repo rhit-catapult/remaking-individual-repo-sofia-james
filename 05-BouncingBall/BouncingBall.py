@@ -9,15 +9,50 @@ import random
 # TODO: Possible member variables: screen, color, x, y, radius, speed_x, speed_y
 # TODO: Methods: __init__, draw, move
 
+class ball():
+    def __init__(self, screen):
+        self.screen = screen
+        self.x = random.randint(0, 1000)
+        self.y = random.randint(0, 800)
+        self.radius = random.randint(7, 15)
+        self.speedx = random.randint(3, 10)
+        self.speedy = random.randint(3, 10)
+        self.color = (random.randint(0, 255), random.randint(0, 255), random.randint(0, 255))
+
+    def move(self):
+        self.x = self.x + self.speedx
+        self.y = self.y + self.speedy
+
+    def draw(self):
+        pygame.draw.circle(self.screen, self.color , (self.x, self.y), self.radius)
+
+    def bounce(self):
+        new_ball = ball(self.screen)
+        if self.y > 800:
+            self.speedy = -self.speedy
+            self.color = (random.randint(0, 255), random.randint(0, 255), random.randint(0, 255))
+        if self.y < 0:
+            self.speedy = -self.speedy
+            self.color = (random.randint(0, 255), random.randint(0, 255), random.randint(0, 255))
+        if self.x > 1000:
+            self.speedx = -self.speedx
+            self.color = (random.randint(0, 255), random.randint(0, 255), random.randint(0, 255))
+        if self.x < 0:
+            self.speedx = -self.speedx
+            self.color = (random.randint(0, 255), random.randint(0, 255), random.randint(0, 255))
+
 
 def main():
     pygame.init()
-    screen = pygame.display.set_mode((300, 300))
+    screen = pygame.display.set_mode((1000, 800))
     pygame.display.set_caption('Bouncing Ball')
     screen.fill(pygame.Color('gray'))
     clock = pygame.time.Clock()
 
     # TODO: Create an instance of the Ball class called ball1
+    ball1 = ball(screen)
+    ball2 = ball(screen)
+    ball3 = ball(screen)
 
     while True:
         for event in pygame.event.get():
@@ -29,6 +64,15 @@ def main():
 
         # TODO: Move the ball
         # TODO: Draw the ball
+        ball1.draw()
+        ball1.move()
+        ball1.bounce()
+        ball2.draw()
+        ball2.move()
+        ball2.bounce()
+        ball3.draw()
+        ball3.move()
+        ball3.bounce()
 
         pygame.display.update()
 
